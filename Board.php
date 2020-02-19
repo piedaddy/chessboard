@@ -5,9 +5,9 @@ class Board
 
   protected $positions = [];
 
-  public function __construct(){
+  public function __construct($positions){
     if (is_string($positions)) {
-      $this->positions = $positions;
+      $this->positions = $this->fen2array($positions);
     } else {
       $this->positions = $positions;
     }
@@ -28,7 +28,7 @@ class Board
     $html = ''; 
     $html .= '<div class="board">';
 
-    for($y = 1;$i<= 8; $i++) {
+    for($y = 1;$y<= 8; $y++) {
       for($x = 1; $x<= 8; $x++) {
 
         if(isset($this->positions[$x][$y])) {
@@ -37,11 +37,42 @@ class Board
           $piece = null;
         }
         $square  = new Square($x, $y, $piece);
-        $html .=$square;
+        $html .= $square;
+      }
       }
       $html .= '</div>';
       return $html;
-      }
   }
 
+
+
+
+  public function fen2array($fen)
+  {
+      $parts = preg_split('#\s+#', $fen);
+      $rows = explode('/', $parts[0]);
+  
+      $pieces = array();
+  
+      $y = 8;
+      foreach($rows as $row)
+      {
+          $x = 1;
+          for($i = 0; $i < strlen($row); $i++)
+          {
+              if(is_numeric($row[$i]))
+              {
+                  $x += intval($row[$i]);
+              }
+              else
+              {
+                  $pieces[$x][$y] = $row[$i];
+                  $x++;
+              }
+          }
+          $y--;
+      }
+  
+      return $pieces;
+  }
 }

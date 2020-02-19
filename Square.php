@@ -29,13 +29,13 @@ class Square
     $class= null;
     if ($this->isDark()) {
       $class = 'dark';
-    } else if (!$this->isDark()){
+    } else{
       $class = 'light';
     }
  
- //   $html .= "div class=\"square {$class}\">";
-   // $html .= $this->piece;
-    //$html .='</div>';
+     $html .= "<div class=\"square {$class}\">";
+     $html .= $this->piece;
+     $html .='</div>';
 
     return $html; 
     //return "<div class=$class>$this->piece</div>"; // enhance this
