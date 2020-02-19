@@ -39,9 +39,9 @@ class Board
         $square  = new Square($x, $y, $piece);
         $html .= $square;
       }
-      }
-      $html .= '</div>';
-      return $html;
+    }
+    $html .= '</div>';
+    return $html;
   }
 
 

@@ -38,7 +38,6 @@ class Square
      $html .='</div>';
 
     return $html; 
-    //return "<div class=$class>$this->piece</div>"; // enhance this
 
   }
 
